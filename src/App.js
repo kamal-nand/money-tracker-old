@@ -44,47 +44,56 @@ function App() {
   }
 
   balance = balance.toFixed(2);
-  const fraction  = balance.split('.')[1];
-  balance = balance.split('.')[0];
+  // const fraction  = balance.split('.')[1];
+  // balance = balance.split('.')[0];
 
   return (
     <main>
-    <h1>${balance}<span>{fraction}</span></h1>
-      <form onSubmit={addNewTransaction}>
-        <div className='basic'>
-          <input type='text' 
-            value={name}
-            onChange={ev => setName(ev.target.value)}
-          placeholder={'new Samsung TV'} />
-          <input type='datetime-local'
-            value={datetime}
-            onChange={ev => setDatetime(ev.target.value)}
-          />
-        </div>
-        <div className='description'>
-          <input type='text' 
-          value={description}
-          onChange={ev => setDescription(ev.target.value)}
-          placeholder={'Description'}/>
-        </div>
-        </form>
-        <button type='submit'>Add new transaction</button> 
-        {transactions.length}
-        <div className="transactions">
-          {transactions.length > 0 && transactions.map(transaction => {
-            <div className="transaction">
-            <div className="left">
-              <div className="name">{transaction.name}</div>
-              <div className="description">{transaction.description}</div>
-            </div>
-            <div className="right">
-              <div className={"price" + (transaction.price < 0 ? "red" : "green")}>{transaction.price}</div>
-              <div className="datetime">{transaction.datetime}</div>
-            </div>
+      <h1>
+        ${balance}
+          <span>.00</span>
+        </h1>
+        <form action = "" onSubmit={addNewTransaction}>
+          <div className='basic'>
+            <input 
+              type='text' 
+              value={name}
+              onChange={ev => setName(ev.target.value)}
+              placeholder={'price and name'} />
+            <input 
+              type='datetime-local'
+              value={datetime}
+              onChange={ev => setDatetime(ev.target.value)}
+            />
           </div>
-          })}
-          
-        </div>
+          <div className='description'>
+            <input 
+            type='text' 
+            value={description}
+            onChange={ev => setDescription(ev.target.value)}
+            placeholder={'Description'}/>
+          </div>
+          <button type='submit'>Add new transaction</button> 
+          </form>
+          {transactions.length}
+          <div className="transactions">
+            {transactions.length > 0 && 
+              transactions.map(transaction =>  {
+                return (
+              <div className="transaction">
+              <div className="left">
+                <div className="name">{transaction.name}</div>
+                <div className="description">{transaction.description}</div>
+              </div>
+              <div className="right">
+                <div className={"price" + (transaction.price < 0 ? "red" : "green")}>{transaction.price}</div>
+                <div className="datetime">{transaction.datetime}</div>
+              </div>
+            </div>
+              );
+            })}
+            
+          </div>
     </main>
   );
 }
